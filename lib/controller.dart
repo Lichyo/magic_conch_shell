@@ -31,18 +31,12 @@ class Controller {
     } else if (randomCase == 5) {
       answer = "都不吃";
       image = "don't_eat.png";
-    } else if (randomCase == 6) {
-      answer = "可能會吧";
-      image = "maybe.png";
-    } else if (randomCase == 7) {
+    }  else if (randomCase == 6) {
       answer = "坐好";
       image = "sit_down.png";
-    } else if (randomCase == 8) {
+    } else if (randomCase == 7) {
       answer = "坐好";
       image = "sit_down_2.png";
-    } else if (randomCase == 9) {
-      answer = "你再問問看";
-      image = "try_again.png";
     }
   }
 }
