@@ -16,13 +16,14 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Controller controller = Controller();
   late final AudioPlayer player;
+  String image = '';
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     player = AudioPlayer();
-    AudioSource audioSource = AudioSource.asset('');
+    image = controller.image;
   }
 
   @override
@@ -49,9 +50,17 @@ class _MyAppState extends State<MyApp> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30.0),
                   ),
-                  child: Image.asset(
-                    'image/${controller.image}',
-                    width: MediaQuery.of(context).size.width,
+                  child: Stack(
+                    children: [
+                      Image.asset(
+                        'image/$image',
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                      Image.asset(
+                        'image/${controller.image}',
+                        width: MediaQuery.of(context).size.width,
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(
@@ -61,12 +70,15 @@ class _MyAppState extends State<MyApp> {
                   angle: 180 / 3.14,
                   child: Draggable(
                     onDragStarted: () {
+                      image = controller.image;
                       controller.getAnswer();
-                      player.setAudioSource(AudioSource.asset('audio/${controller.answer}.m4a'));
                     },
                     onDragEnd: (value) {
-                      player.play();
-                      setState(() {});
+                      setState(() {
+                        player.setAudioSource(AudioSource.asset(
+                            'audio/${controller.answer}.m4a'));
+                        player.play();
+                      });
                     },
                     feedback: Image.asset(
                       'image/tab.png',
